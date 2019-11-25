@@ -1,12 +1,12 @@
 import { Greeter } from './greeter';
-import { LoginComponent } from './login.component'
-import { RegisterComponent } from './register.component'
+import { LoginComponent } from './login.component';
+import { RegisterComponent } from './register.component';
 
 class App {
-  view: HTMLElement
-  history: any
-  onpopstate: any
-  state: string
+  view: HTMLElement;
+  history: any;
+  onpopstate: any;
+  state: string;
   constructor (
     private routes: any[],
     private directives: any[]
@@ -20,10 +20,17 @@ class App {
 
   init () {
     const app = this;
-    this.onpopstate = function(event: any) {
-      console.log('location: ' + document.location + ', state: ' + JSON.stringify(event.state));
-      app.load(event.state);
-    }
+    // window.addEventListener('pushState', (event: any) => {
+    // window.onpopstate = function(event: any) {
+    const pushState = history.pushState;
+    history.pushState = function (state, title, url) {
+      pushState.apply(history, [state, title, url]);
+      console.log([state, title, url]);
+      app.load(state);
+    };
+
+    // }
+    // });
     this.load('');
   }
 
@@ -37,12 +44,12 @@ class App {
     eClicks.forEach((e: any) => {
       const methodName = e.dataset.click.replace(/\(.*\)/, '');
       if (component[methodName]) {
-        e.removeAttribute('data-click')
+        e.removeAttribute('data-click');
         e.onclick = () => {
           return component[methodName]();
-        }
+        };
       }
-    })
+    });
   }
 
   compile (component: any) {
@@ -53,13 +60,13 @@ class App {
     const data = new component();
     const template = data.template;
     let html = template;
-    const props = Object.keys(data)
+    const props = Object.keys(data);
     props.forEach(k => {
       if (k !== 'template' && k !== 'selector') {
         const regex = new RegExp(`\{${k}\}`, 'g');
         html = html.replace(regex, data[k]);
       }
-    })
+    });
     const elem = document.createElement('div');
     elem.innerHTML = html;
     this.registerEvents(elem, data);
@@ -76,10 +83,10 @@ class App {
           const dir = this.compileComponent(d);
           eDir.parentNode.replaceChild(dir, eDir);
 
-        })
+        });
         // html = html.replace(directive.selector, dir.innerHTML);
       }
-    })
+    });
     return elem;
   }
 
@@ -95,6 +102,10 @@ const routes = [
   {
     route: '',
     component: Greeter
+  },
+  {
+    route: '/profile',
+    component: RegisterComponent
   }
 ];
 

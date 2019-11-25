@@ -3,18 +3,18 @@ import { map, catchError } from 'rxjs/operators'
 import { of } from 'rxjs'
 
 class User {
-  firstName: string
-  lastName: string
-  company: string
-  username: string
-  email: string
-  password: string
+  firstName: string;
+  lastName: string;
+  company: string;
+  username: string;
+  email: string;
+  password: string;
 }
 
 export class UserService {
-  domain = '//localhost:8080'
-  user: User
-  users: User[]
+  domain = '//localhost:8080';
+  user: User;
+  users: User[];
   constructor () {}
 
   login (username: string, password: string) {
@@ -30,7 +30,7 @@ export class UserService {
       }
     }).pipe(
       map(response => {
-        console.log('response: ', response)
+        console.log('response: ', response);
       }),
       catchError(error => {
         console.log('error: ', error);
@@ -50,7 +50,7 @@ export class UserService {
       body: user
     }).pipe(
       map(response => {
-        console.log('response: ', response)
+        console.log('response: ', response);
       }),
       catchError(error => {
         console.log('error: ', error);

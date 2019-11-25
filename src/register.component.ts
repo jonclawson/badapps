@@ -1,7 +1,7 @@
 import { UserService } from './user.service'
 
 export class RegisterComponent {
-  selector = 'register'
+  selector = 'register';
   template = `
     <form name="register" onsubmit="return">
       <div class="form-group">
@@ -37,20 +37,20 @@ export class RegisterComponent {
       <button type="button" data-click="signUp()">Sign Up</button>
 
     </form>
-  `
-  userService: any
+  `;
+  userService: any;
 
   constructor () {
-    this.userService = new UserService()
+    this.userService = new UserService();
   }
 
   signUp () {
-    const username = (<HTMLInputElement>document.querySelector('[name=register] [name=username]')).value
-    const password = (<HTMLInputElement>document.querySelector('[name=register] [name=password]')).value
-    const firstName = (<HTMLInputElement>document.querySelector('[name=register] [name=firstname]')).value
-    const lastName = (<HTMLInputElement>document.querySelector('[name=register] [name=lastname]')).value
-    const company = (<HTMLInputElement>document.querySelector('[name=register] [name=company]')).value
-    const email = (<HTMLInputElement>document.querySelector('[name=register] [name=email]')).value
+    const username = (<HTMLInputElement>document.querySelector('[name=register] [name=username]')).value;
+    const password = (<HTMLInputElement>document.querySelector('[name=register] [name=password]')).value;
+    const firstName = (<HTMLInputElement>document.querySelector('[name=register] [name=firstname]')).value;
+    const lastName = (<HTMLInputElement>document.querySelector('[name=register] [name=lastname]')).value;
+    const company = (<HTMLInputElement>document.querySelector('[name=register] [name=company]')).value;
+    const email = (<HTMLInputElement>document.querySelector('[name=register] [name=email]')).value;
     const user = {
       username,
       password,
@@ -59,6 +59,6 @@ export class RegisterComponent {
       company,
       email
     }
-    this.userService.register(user).subscribe((r: any) => {})
+    this.userService.register(user).subscribe((r: any) => {});
   }
 }

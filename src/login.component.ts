@@ -1,7 +1,7 @@
 import { UserService } from './user.service'
 
 export class LoginComponent {
-  selector = 'login'
+  selector = 'login';
   template = `
     <form name="login" onsubmit="return">
       <div class="form-group">
@@ -22,18 +22,18 @@ export class LoginComponent {
       <button type="button" data-click="canel()" >Cancel</button>
 
     </form>
-  `
-  userService: any
+  `;
+  userService: any;
   constructor (
     // userService: UserService // TODO support injections
   ) {
-    this.userService = new UserService()
+    this.userService = new UserService();
   }
 
   save () {
     alert('save')
-    const username = (<HTMLInputElement>document.querySelector('[name=usernameoremail]')).value
-    const password = (<HTMLInputElement>document.querySelector('[name=password]')).value
+    const username = (<HTMLInputElement>document.querySelector('[name=usernameoremail]')).value;
+    const password = (<HTMLInputElement>document.querySelector('[name=password]')).value;
     this.userService.login(username, password).subscribe((r: any) => {
 
     })
