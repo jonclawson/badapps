@@ -3,8 +3,8 @@ import { StateService } from './state'
 
 export class Greeter {
     template = `
-    <a data-click="home()">hello {name}</a>
-    <a data-click="profile()">hello {name}</a>
+    <a click="data.home()" style="cursor: pointer;">hello {{data.name}}</a>
+    <a click="data.profile()" style="cursor: pointer;">hello {{data.name}}</a>
     <login></login>
     <register></register>
     `;
@@ -14,10 +14,18 @@ export class Greeter {
       this.state = new StateService();
     }
 
-    home () {
-      this.state.go('/')
+    data () {
+      const d = this
+      return {
+        name: 'tom',
+        home () {
+          d.state.go('/')
+        },
+        profile () {
+          d.state.go('/profile');
+        }
+      }
     }
-    profile () {
-      this.state.go('/profile');
-    }
+
+
 }

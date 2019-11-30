@@ -34,7 +34,7 @@ export class RegisterComponent {
         <input type="password" name="password" value="password" />
       </div>
 
-      <button type="button" data-click="signUp()">Sign Up</button>
+      <button type="button" click="component.signUp()">Sign Up</button>
 
     </form>
   `;

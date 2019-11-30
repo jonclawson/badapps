@@ -20,7 +20,7 @@ class App {
 
   init () {
     const app = this;
-    // window.addEventListener('pushState', (event: any) => {
+    // window.addEventListener('onpopstate', (event: any) => {
     // window.onpopstate = function(event: any) {
     const pushState = history.pushState;
     history.pushState = function (state, title, url) {
@@ -39,37 +39,29 @@ class App {
     this.view.append(elem);
   }
 
-  registerEvents (elem: HTMLElement, component: any) {
-    const eClicks = elem.querySelectorAll('[data-click]');
-    eClicks.forEach((e: any) => {
-      const methodName = e.dataset.click.replace(/\(.*\)/, '');
-      if (component[methodName]) {
-        e.removeAttribute('data-click');
-        e.onclick = () => {
-          return component[methodName]();
-        };
-      }
-    });
-  }
-
   compile (component: any) {
     return this.compileComponent(component);
   }
 
-  compileComponent(component: any) {
-    const data = new component();
-    const template = data.template;
-    let html = template;
-    const props = Object.keys(data);
-    props.forEach(k => {
-      if (k !== 'template' && k !== 'selector') {
-        const regex = new RegExp(`\{${k}\}`, 'g');
-        html = html.replace(regex, data[k]);
-      }
-    });
+  compileComponent(Component: any) {
+    const component = new Component();
+    const data = component.data ? component.data() : component
+    const template = component.template;
+
     const elem = document.createElement('div');
-    elem.innerHTML = html;
-    this.registerEvents(elem, data);
+    elem.innerHTML = template;
+    const match = elem.innerHTML.match(/\{\{(.*)\}\}/g)
+    if (match) {
+      match.forEach(m => {
+       const mv = m.replace(/\{\{/g, '').replace(/\}\}/g, '')
+       elem.innerHTML = elem.innerHTML.replace(m, eval(mv))
+      })
+    }
+    elem.querySelectorAll('[click]').forEach((e: any) => {
+      const str = e.getAttribute('click');
+     e.onclick = () => eval(str);
+     e.removeAttribute('click');
+    })
     this.compileDirectives(elem);
     return elem;
   }
@@ -84,7 +76,6 @@ class App {
           eDir.parentNode.replaceChild(dir, eDir);
 
         });
-        // html = html.replace(directive.selector, dir.innerHTML);
       }
     });
     return elem;

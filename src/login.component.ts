@@ -18,8 +18,8 @@ export class LoginComponent {
         <input type="password" name="password" />
       </div>
 
-      <button type="button" data-click="save()" >Save</button>
-      <button type="button" data-click="canel()" >Cancel</button>
+      <button type="button" click="component.save()" >Save</button>
+      <button type="button" click="component.canel()" >Cancel</button>
 
     </form>
   `;
