@@ -1,4 +1,4 @@
-import { UserService } from './user.service'
+import { userService } from './core.services';
 
 export class LoginComponent {
   selector = 'login';
@@ -27,15 +27,14 @@ export class LoginComponent {
   constructor (
     // userService: UserService // TODO support injections
   ) {
-    this.userService = new UserService();
+    this.userService = userService;
   }
 
   save () {
-    alert('save')
     const username = (<HTMLInputElement>document.querySelector('[name=usernameoremail]')).value;
     const password = (<HTMLInputElement>document.querySelector('[name=password]')).value;
     this.userService.login(username, password).subscribe((r: any) => {
 
-    })
+    });
   }
 }

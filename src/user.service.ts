@@ -1,8 +1,11 @@
-import { ajax } from 'rxjs/ajax'
-import { map, catchError } from 'rxjs/operators'
-import { of } from 'rxjs'
+import { ajax } from 'rxjs/ajax';
+import { map, catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
 
-class User {
+import { stateService } from './core.services';
+import { StateService } from './state.service';
+
+export class User {
   firstName: string;
   lastName: string;
   company: string;
@@ -13,9 +16,23 @@ class User {
 
 export class UserService {
   domain = '//localhost:8080';
+  token: string;
   user: User;
   users: User[];
-  constructor () {}
+
+  constructor () {
+    const token = localStorage.getItem('token');
+    if (token) {
+      this.token = token;
+      this.profile().subscribe(u => u);
+    }
+  }
+
+  logout () {
+    localStorage.clear();
+    stateService.go('');
+    location.reload();
+  }
 
   login (username: string, password: string) {
     return ajax({
@@ -30,6 +47,9 @@ export class UserService {
       }
     }).pipe(
       map(response => {
+        const { tokenType, accessToken } = response.response;
+        this.token = `${tokenType} ${accessToken}`;
+        localStorage.setItem('token', this.token);
         console.log('response: ', response);
       }),
       catchError(error => {
@@ -51,6 +71,28 @@ export class UserService {
     }).pipe(
       map(response => {
         console.log('response: ', response);
+      }),
+      catchError(error => {
+        console.log('error: ', error);
+        return of(error);
+      })
+    );
+  }
+
+  profile () {
+    return ajax({
+      url: `${this.domain}/api/users/me`,
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': this.token
+      }
+    }).pipe(
+      map(response => {
+        const user = response.response;
+        console.log('user: ', user);
+        this.user = user;
+        return user;
       }),
       catchError(error => {
         console.log('error: ', error);

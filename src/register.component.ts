@@ -1,4 +1,4 @@
-import { UserService } from './user.service'
+import { userService } from './core.services';
 
 export class RegisterComponent {
   selector = 'register';
@@ -41,7 +41,7 @@ export class RegisterComponent {
   userService: any;
 
   constructor () {
-    this.userService = new UserService();
+    this.userService = userService;
   }
 
   signUp () {
@@ -58,7 +58,7 @@ export class RegisterComponent {
       lastName,
       company,
       email
-    }
+    };
     this.userService.register(user).subscribe((r: any) => {});
   }
 }
