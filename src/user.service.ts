@@ -3,7 +3,6 @@ import { map, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 import { stateService } from './core.services';
-import { StateService } from './state.service';
 
 export class User {
   firstName: string;

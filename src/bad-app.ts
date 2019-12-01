@@ -1,3 +1,4 @@
+
 export class BadApp {
   view: HTMLElement;
   history: any;
@@ -30,8 +31,10 @@ export class BadApp {
   }
 
   render (elem: HTMLElement) {
-    this.view.innerHTML = '';
-    this.view.append(elem);
+    this.compileDirectives(this.view);
+    const view = this.view.querySelector('view-main')
+    view.innerHTML = ''
+    view.append(elem);
   }
 
   compile (component: any) {
@@ -50,7 +53,7 @@ export class BadApp {
     this.renderComponent(component, elem);
     let copy = Object.assign({}, component);
     setInterval(() => {
-      if (JSON.stringify(copy) != JSON.stringify(component)) {
+      if (JSON.stringify(copy) !== JSON.stringify(component)) {
         this.renderComponent(component, elem);
         copy = Object.assign({}, component);
       }
@@ -70,6 +73,14 @@ export class BadApp {
        elem.innerHTML = elem.innerHTML.replace(m, sanitizeHTML(eval(mv)));
      });
     }
+    elem.querySelectorAll('[if]').forEach((e: any) => {
+      const str = e.getAttribute('if');
+      // TODO: replace eval
+      if (!eval(str)) {
+        e.parentNode.removeChild(e);
+      }
+     e.removeAttribute('if');
+   });
     elem.querySelectorAll('[click]').forEach((e: any) => {
       const str = e.getAttribute('click');
       // TODO: replace eval
@@ -101,6 +112,7 @@ export class BadApp {
     this.render(elem);
   }
 }
+
 
 function sanitizeHTML (str: string) {
   var temp = document.createElement('div');

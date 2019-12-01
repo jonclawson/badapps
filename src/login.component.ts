@@ -34,7 +34,7 @@ export class LoginComponent {
     const username = (<HTMLInputElement>document.querySelector('[name=usernameoremail]')).value;
     const password = (<HTMLInputElement>document.querySelector('[name=password]')).value;
     this.userService.login(username, password).subscribe((r: any) => {
-
+      location.reload();
     });
   }
 }

@@ -54,6 +54,7 @@ module.exports = {
 
     devtool: 'source-map',
     devServer: {
-      index: 'index.html'
+      index: 'index.html',
+      historyApiFallback: true
     }
 };
