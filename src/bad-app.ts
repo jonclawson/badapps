@@ -65,14 +65,6 @@ export class BadApp {
     const data = component.data ? component.data() : component; // alias for templates
     const template = component.template;
     elem.innerHTML = template;
-    const match = elem.innerHTML.match(/\{\{(.*)\}\}/g);
-    if (match) {
-      match.forEach(m => {
-       const mv = m.replace(/\{\{/g, '').replace(/\}\}/g, '');
-       // TODO: replace eval
-       elem.innerHTML = elem.innerHTML.replace(m, sanitizeHTML(eval(mv)));
-     });
-    }
     elem.querySelectorAll('[if]').forEach((e: any) => {
       const str = e.getAttribute('if');
       // TODO: replace eval
@@ -81,6 +73,14 @@ export class BadApp {
       }
      e.removeAttribute('if');
    });
+    const match = elem.innerHTML.match(/\{\{(.*)\}\}/g);
+    if (match) {
+      match.forEach(m => {
+       const mv = m.replace(/\{\{/g, '').replace(/\}\}/g, '');
+       // TODO: replace eval
+       elem.innerHTML = elem.innerHTML.replace(m, sanitizeHTML(eval(mv)));
+     });
+    }
     elem.querySelectorAll('[click]').forEach((e: any) => {
       const str = e.getAttribute('click');
       // TODO: replace eval
@@ -88,7 +88,6 @@ export class BadApp {
      e.removeAttribute('click');
    });
     this.compileDirectives(elem);
-    // return elem.innerHTML
   }
 
   compileDirectives (elem: HTMLElement) {

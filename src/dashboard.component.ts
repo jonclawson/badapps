@@ -9,7 +9,7 @@ export class DashboardCoomponent {
       <register></register>
     </div>
     `;
-    name = '';
+    name = 'guest';
     userService: UserService;
     constructor() {
       this.userService = userService;
