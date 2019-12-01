@@ -68,11 +68,31 @@ export class BadApp {
     elem.querySelectorAll('[if]').forEach((e: any) => {
       const str = e.getAttribute('if');
       // TODO: replace eval
-      if (!eval(str)) {
+      const result = eval(str);
+      if (!result) {
         e.parentNode.removeChild(e);
       }
      e.removeAttribute('if');
    });
+  //  elem.querySelectorAll('[for]').forEach((e: any) => {
+  //    const str = e.getAttribute('for');
+  //    const html = e.innerHTML;
+  //    const exp = eval(str);
+  //    console.log(exp);
+  //    // TODO: replace eval
+  //    // for (exp) {
+  //    //   const match = e.innerHTML.match(/\{\{(.*)\}\}/g);
+  //    //   if (match) {
+  //    //     match.forEach(m => {
+  //    //      const mv = m.replace(/\{\{/g, '').replace(/\}\}/g, '');
+  //    //      // TODO: replace eval
+  //    //      e.innerHTML = e.innerHTML.replace(m, sanitizeHTML(eval(mv)));
+  //    //    });
+  //    //   }
+  //    // }
+  //   e.innerHTML = '';
+  //   e.removeAttribute('for');
+  // });
     const match = elem.innerHTML.match(/\{\{(.*)\}\}/g);
     if (match) {
       match.forEach(m => {

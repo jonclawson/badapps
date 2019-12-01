@@ -16,7 +16,9 @@ export class MenuComponent {
     constructor() {
       this.state = stateService;
       this.userService = userService;
-      this.userService.profile().subscribe(user => this.name = user.firstName);
+      if ( this.userService.token) {
+        this.userService.profile().subscribe(user => this.name = user.firstName);
+      }
     }
 
     data () {

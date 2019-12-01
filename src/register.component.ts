@@ -6,32 +6,32 @@ export class RegisterComponent {
     <form name="register" onsubmit="return">
       <div class="form-group">
         <label>First Name</label>
-        <input type="text" name="firstname" value="john" />
+        <input type="text" name="firstname" />
       </div>
 
       <div class="form-group">
         <label>Last Name</label>
-        <input type="text" name="lastname" value="mann" />
+        <input type="text" name="lastname"  />
       </div>
 
       <div class="form-group">
         <label>Compant</label>
-        <input type="text" name="company" value="jonman" />
+        <input type="text" name="company"  />
       </div>
 
       <div class="form-group">
         <label>Email</label>
-        <input type="text" name="email" value="jon@test.com" />
+        <input type="text" name="email"  />
       </div>
 
       <div class="form-group">
         <label>Username</label>
-        <input type="text" name="username" value="jonman" />
+        <input type="text" name="username" />
       </div>
 
       <div class="form-group">
         <label>Password</label>
-        <input type="password" name="password" value="password" />
+        <input type="password" name="password"  />
       </div>
 
       <button type="button" click="component.signUp()">Sign Up</button>

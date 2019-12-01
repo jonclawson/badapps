@@ -94,4 +94,24 @@ export class UserService {
       })
     );
   }
+
+  getUsers () {
+    return ajax({
+      url: `${this.domain}/api/users`,
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': this.token
+      }
+    }).pipe(
+      map(response => {
+        const users = response.response;
+        this.users = users;
+        return users;
+      }),
+      catchError(error => {
+        return of(error);
+      })
+    );
+  }
 }
