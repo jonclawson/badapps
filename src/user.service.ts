@@ -49,10 +49,8 @@ export class UserService {
         const { tokenType, accessToken } = response.response;
         this.token = `${tokenType} ${accessToken}`;
         localStorage.setItem('token', this.token);
-        console.log('response: ', response);
       }),
       catchError(error => {
-        console.log('error: ', error);
         return of(error);
       })
     );
@@ -69,10 +67,9 @@ export class UserService {
       body: user
     }).pipe(
       map(response => {
-        console.log('response: ', response);
+        return response.response;
       }),
       catchError(error => {
-        console.log('error: ', error);
         return of(error);
       })
     );
@@ -89,12 +86,10 @@ export class UserService {
     }).pipe(
       map(response => {
         const user = response.response;
-        console.log('user: ', user);
         this.user = user;
         return user;
       }),
       catchError(error => {
-        console.log('error: ', error);
         return of(error);
       })
     );

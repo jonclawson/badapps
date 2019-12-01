@@ -1,6 +1,8 @@
 export class StateService {
-
-  constructor () {}
+  state: string;
+  constructor () {
+    this.state = history.state;
+  }
   history = window.history;
   current: string;
   go (state: string) {

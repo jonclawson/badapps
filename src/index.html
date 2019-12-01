@@ -1,13 +1,28 @@
 <html>
-<head>
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-</head>
-<body>
-    <h1>Bad App</h1>
-    <div id="app">
-      <user-menu></user-menu>
-      <view-main></view-main>
-    </div>
-    <script src="/main.bundle.js"></script>
-</body>
+  <head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body>
+      <div id="app">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-12">
+              <div class="float-left">
+                <h1>Bad App</h1>
+              </div>
+              <div class="float-right">
+                <user-menu></user-menu>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-2">side nav</div>
+            <div class="col-10">
+              <view-main></view-main>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script src="/main.bundle.js"></script>
+  </body>
 </html>

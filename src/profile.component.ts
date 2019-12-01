@@ -2,10 +2,10 @@ import { userService } from './core.services';
 import { User, UserService } from './user.service';
 export class ProfileComponent {
   template = `
-      <div> {{data.firstName}} </div>
-      <div> {{data.lastName}} </div>
-      <div> {{data.username}} </div>
-      <div> {{data.company}} </div>
+      <h1>My Profile</h1>
+      <div>First Name:  {{data.firstName}} </div>
+      <div>Last Name:  {{data.lastName}} </div>
+      <div>Username:  {{data.username}} </div>
   `;
   user: User;
   firstName: string;
@@ -15,7 +15,6 @@ export class ProfileComponent {
   constructor () {
     this.userService = userService;
     this.userService.profile().subscribe((user: User) => {
-      console.log(user);
       this.user = user;
       Object.assign(this, user);
     });

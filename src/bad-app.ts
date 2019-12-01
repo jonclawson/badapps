@@ -1,6 +1,6 @@
-
+import { stateService } from './core.services';
 export class BadApp {
-  view: HTMLElement;
+  elem: HTMLElement;
   history: any;
   onpopstate: any;
   state: string;
@@ -8,7 +8,7 @@ export class BadApp {
     private routes: any[],
     private directives: any[]
   ) {
-    this.view = document.querySelector('#app');
+    this.elem = document.querySelector('#app');
     this.history = window.history;
     this.onpopstate = window.onpopstate;
     this.init();
@@ -27,13 +27,13 @@ export class BadApp {
       app.load(event.state);
     };
     // });
-    this.load('');
+    this.load(stateService.state);
   }
 
   render (elem: HTMLElement) {
-    this.compileDirectives(this.view);
-    const view = this.view.querySelector('view-main')
-    view.innerHTML = ''
+    this.compileDirectives(this.elem);
+    const view = this.elem.querySelector('view-main');
+    view.innerHTML = '';
     view.append(elem);
   }
 
