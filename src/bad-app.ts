@@ -74,25 +74,27 @@ export class BadApp {
       }
      e.removeAttribute('if');
    });
-  //  elem.querySelectorAll('[for]').forEach((e: any) => {
-  //    const str = e.getAttribute('for');
-  //    const html = e.innerHTML;
-  //    const exp = eval(str);
-  //    console.log(exp);
-  //    // TODO: replace eval
-  //    // for (exp) {
-  //    //   const match = e.innerHTML.match(/\{\{(.*)\}\}/g);
-  //    //   if (match) {
-  //    //     match.forEach(m => {
-  //    //      const mv = m.replace(/\{\{/g, '').replace(/\}\}/g, '');
-  //    //      // TODO: replace eval
-  //    //      e.innerHTML = e.innerHTML.replace(m, sanitizeHTML(eval(mv)));
-  //    //    });
-  //    //   }
-  //    // }
-  //   e.innerHTML = '';
-  //   e.removeAttribute('for');
-  // });
+   elem.querySelectorAll('[for]').forEach((e: any) => {
+     const exps = e.getAttribute('for').split('of');
+     let html = e.innerHTML;
+     const items = eval(exps[1].trim());
+
+    if (items) {
+      e.innerHTML = '';
+     for (let item of items) {
+       const match = html.match(/\{(.*)\}/g);
+       if (match) {
+         match.forEach((m: any) => {
+          const mv = m.replace(/\{/g, '').replace(/\}/g, '').replace(exps[0].trim(), 'item');
+          // TODO: replace eval
+          html = html.replace(m, sanitizeHTML(eval(mv)));
+        });
+       }
+       e.innerHTML += html;
+     }
+    }
+    e.removeAttribute('for');
+  });
     const match = elem.innerHTML.match(/\{\{(.*)\}\}/g);
     if (match) {
       match.forEach(m => {
@@ -126,7 +128,7 @@ export class BadApp {
 
   load (state: string) {
     this.state = !state ? '' : state;
-    const component = this.routes.filter(r => r.route === this.state)[0].component;
+    const component = [...this.routes.filter(r => r.route === this.state), ...this.routes.filter(r => r.route === '')][0].component;
     const elem = this.compile(component);
     this.render(elem);
   }

@@ -1,3 +1,4 @@
+import * as coreServices from './core.services';
 import { DashboardCoomponent } from './dashboard.component';
 import { LoginComponent } from './login.component';
 import { RegisterComponent } from './register.component';
@@ -7,6 +8,7 @@ import { UsersComponent } from './users.component';
 import { PostComponent } from './post.component';
 import { PostsComponent } from './posts.component';
 import { CreatePostComponent } from './create-post.component';
+import { SideNavComponent } from './side-nav.component';
 import { BadApp } from './bad-app';
 
 const routes = [
@@ -23,7 +25,7 @@ const routes = [
     component: PostComponent
   },
   {
-    route: '/post/create/',
+    route: '/post/create',
     component: CreatePostComponent
   }
 ];
@@ -34,7 +36,8 @@ const directives = [
   RegisterComponent,
   UsersComponent,
   CreatePostComponent,
-  PostsComponent
+  PostsComponent,
+  SideNavComponent
 ];
 
 const app = new BadApp(routes, directives);

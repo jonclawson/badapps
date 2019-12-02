@@ -1,6 +1,7 @@
 import { ajax } from 'rxjs/ajax';
 import { map, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { HttpService } from './http.service';
 
 export class Post {
   title: string;
@@ -11,7 +12,7 @@ export class PostService {
   posts: any[];
   token: string;
   domain: string = '//localhost:8080';
-  constructor () {
+  constructor (private http: HttpService) {
     const token = localStorage.getItem('token');
     if (token) {
       this.token = token;
@@ -59,17 +60,21 @@ export class PostService {
   }
 
   getPosts () {
-    return ajax({
-      url: `${this.domain}/api/posts`,
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': this.token
-      }
-    }).pipe(
+    // return ajax({
+    //   url: `${this.domain}/api/posts`,
+    //   method: 'GET',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     'Authorization': this.token
+    //   }
+    // })
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': this.token
+    };
+    return this.http.get(`${this.domain}/api/posts`, headers).pipe(
       map(response => {
-        const posts = response.response;
-        console.log('posts', posts);
+        const posts = response.response.content;
         return posts;
       }),
       catchError(error => {

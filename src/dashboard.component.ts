@@ -4,6 +4,7 @@ import { UserService } from './user.service';
 
 export class DashboardCoomponent {
     template = `
+    <h1>Dashboard</h1>
     <posts></posts>
     <div if="!data.name">
       <login></login>

@@ -2,6 +2,7 @@ import { ajax } from 'rxjs/ajax';
 import { map, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 
+import { HttpService } from './http.service';
 import { stateService } from './core.services';
 
 export class User {
@@ -19,7 +20,7 @@ export class UserService {
   user: User;
   users: User[];
 
-  constructor () {
+  constructor (private http: HttpService) {
     const token = localStorage.getItem('token');
     if (token) {
       this.token = token;
@@ -76,14 +77,19 @@ export class UserService {
   }
 
   profile () {
-    return ajax({
-      url: `${this.domain}/api/users/me`,
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': this.token
-      }
-    }).pipe(
+    // return ajax({
+    //   url: `${this.domain}/api/users/me`,
+    //   method: 'GET',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     'Authorization': this.token
+    //   }
+    // })
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': this.token
+    };
+    return this.http.get(`${this.domain}/api/users/me`, headers).pipe(
       map(response => {
         const user = response.response;
         this.user = user;

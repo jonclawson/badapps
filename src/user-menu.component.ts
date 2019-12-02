@@ -26,7 +26,7 @@ export class MenuComponent {
       return {
         name: d.name,
         home () {
-          d.state.go('');
+          d.state.go('/');
         },
         profile () {
           d.state.go('/profile');

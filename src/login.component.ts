@@ -3,7 +3,7 @@ import { userService } from './core.services';
 export class LoginComponent {
   selector = 'login';
   template = `
-    <form name="login" onsubmit="return">
+    <form name="login" onsubmit="return false">
       <div class="form-group">
         <label>
           username or email
