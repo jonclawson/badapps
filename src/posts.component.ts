@@ -15,7 +15,9 @@ export class PostsComponent {
   constructor () {
     const token = userService.token;
     if (token) {
-      postService.getPosts().subscribe((posts: Post[]) => this.posts = posts);
+      postService.getPosts().subscribe((posts: Post[]) => {
+        this.posts = posts;
+      });
     }
   }
 }

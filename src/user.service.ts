@@ -77,19 +77,11 @@ export class UserService {
   }
 
   profile () {
-    // return ajax({
-    //   url: `${this.domain}/api/users/me`,
-    //   method: 'GET',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     'Authorization': this.token
-    //   }
-    // })
     const headers = {
       'Content-Type': 'application/json',
       'Authorization': this.token
     };
-    return this.http.get(`${this.domain}/api/users/me`, headers).pipe(
+    return this.http.get(`${this.domain}/api/users/current`, headers).pipe(
       map(response => {
         const user = response.response;
         this.user = user;

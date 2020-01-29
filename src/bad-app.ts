@@ -76,12 +76,13 @@ export class BadApp {
    });
    elem.querySelectorAll('[for]').forEach((e: any) => {
      const exps = e.getAttribute('for').split('of');
-     let html = e.innerHTML;
+     const htmlTemplate = e.innerHTML;
      const items = eval(exps[1].trim());
 
     if (items) {
       e.innerHTML = '';
      for (let item of items) {
+       let html = htmlTemplate;
        const match = html.match(/\{(.*)\}/g);
        if (match) {
          match.forEach((m: any) => {

@@ -30,7 +30,6 @@ export class PostService {
     }).pipe(
       map(response => {
         const post = response.response;
-        console.log('post', post);
         return post;
       }),
       catchError(error => {
@@ -50,7 +49,6 @@ export class PostService {
     }).pipe(
       map(response => {
         const post = response.response;
-        console.log('post', post);
         return post;
       }),
       catchError(error => {
@@ -60,14 +58,6 @@ export class PostService {
   }
 
   getPosts () {
-    // return ajax({
-    //   url: `${this.domain}/api/posts`,
-    //   method: 'GET',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     'Authorization': this.token
-    //   }
-    // })
     const headers = {
       'Content-Type': 'application/json',
       'Authorization': this.token
@@ -94,7 +84,6 @@ export class PostService {
     }).pipe(
       map(response => {
         const post = response.response;
-        console.log('post', post);
         return post;
       }),
       catchError(error => {
