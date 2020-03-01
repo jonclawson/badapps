@@ -1,12 +1,9 @@
-Webpack 4 + TypeScript starter
+# Bad Apps Framework
+#### Dont use this, maybe play with it. 
+##### This code is a mock framework that uses eval() for templating. Maybe some day the parts with eval() will be improved.
+Built with Webpack 4 + TypeScript starter
 ------------------------------
 https://github.com/juristr/webpack-typescript-starter.git
-
-[![Build Status](https://travis-ci.org/juristr/webpack-typescript-starter.svg?branch=master)](https://travis-ci.org/juristr/webpack-typescript-starter)
-
-This is by far no sophisticated starter or whatever. The goal is to get the simplest possible setup to get you started with Webpack 4 and TypeScript. You can then start from here and add further stuff you need, such as SASS compilation, add framework specific stuff etc.
-
-Also check out the official Webpack 4 docs for a proper TypeScript setup: https://webpack.js.org/guides/typescript/
 
 _Note, this is still a WIP. Contributions/suggestions are welcome :smiley:_
 
